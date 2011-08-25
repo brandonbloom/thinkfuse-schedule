@@ -1,4 +1,4 @@
-class ThinkfuseSchedule::Schedule::MonthlyByDay < ThinkfuseSchedule::Schedule::Monthly
+class Schedules::MonthlyByDay < Schedules::Monthly
 
   attr_reader :day
 
@@ -46,4 +46,3 @@ class ThinkfuseSchedule::Schedule::MonthlyByDay < ThinkfuseSchedule::Schedule::M
   end
 
 end
-

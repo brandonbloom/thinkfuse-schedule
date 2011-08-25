@@ -1,7 +1,7 @@
-class ThinkfuseSchedule::Schedule::Weekly < ThinkfuseSchedule::Schedule
+class Schedules::Weekly < Schedule
 
-  include ThinkfuseSchedule::Schedule::Interval
-  include ThinkfuseSchedule::Schedule::DayOfWeek
+  include Schedules::Interval
+  include Schedules::DayOfWeek
 
   def initialize(attrs = {})
     args = attrs.slice :hour, :start_date, :time_zone, :interval, :day
@@ -27,7 +27,7 @@ class ThinkfuseSchedule::Schedule::Weekly < ThinkfuseSchedule::Schedule
   protected
 
   def day=(value)
-    @day = ThinkfuseSchedule::Schedule.coerce_day(value)
+    @day = Schedule.coerce_day(value)
   end
 
   def to_s_base

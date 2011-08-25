@@ -1,7 +1,6 @@
-class ThinkfuseSchedule::Schedule::Monthly < ThinkfuseSchedule::Schedule
-  include ThinkfuseSchedule
+class Schedules::Monthly < Schedule
 
-  include Schedule::Interval
+  include Schedules::Interval
 
   REQUEST_PARAMS = [:hour, :start_date, :time_zone, :interval, :day]
 

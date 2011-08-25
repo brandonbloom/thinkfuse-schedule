@@ -1,5 +1,4 @@
-class ThinkfuseSchedule::Schedule::Daily < ThinkfuseSchedule::Schedule
-  include ThinkfuseSchedule
+class Schedules::Daily < Schedule
   attr_reader :days
 
   validates_length_of :days, :message => 'Select at least one day',
@@ -51,17 +50,17 @@ class ThinkfuseSchedule::Schedule::Daily < ThinkfuseSchedule::Schedule
     if value.blank?
       @days = []
     else
-      @days = value.map { |dow| ThinkfuseSchedule::Schedule.coerce_day(dow) }
+      @days = value.map { |dow| Schedule.coerce_day(dow) }
       @days.compact!
       @days.uniq!
       @days = @days.sort_by do |dow|
-        ThinkfuseSchedule::Schedule.day_index(dow)
+        Schedule.day_index(dow)
       end
     end
   end
 
   def day_indices
-    days.map { |dow| ThinkfuseSchedule::Schedule.day_index(dow) }
+    days.map { |dow| Schedule.day_index(dow) }
   end
 
   alias to_s_base days_to_s

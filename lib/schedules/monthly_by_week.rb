@@ -1,7 +1,6 @@
-class ThinkfuseSchedule::Schedule::MonthlyByWeek < ThinkfuseSchedule::Schedule::Monthly
-  include ThinkfuseSchedule
+class Schedules::MonthlyByWeek < Schedules::Monthly
 
-  include Schedule::DayOfWeek
+  include Schedules::DayOfWeek
 
   attr_reader :week
 

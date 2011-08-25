@@ -1,7 +1,6 @@
 require 'spec_helper'
 
-describe ThinkfuseSchedule do
-  include ThinkfuseSchedule
+describe Schedule do
 
   describe '#start_date' do
 
@@ -91,7 +90,7 @@ describe ThinkfuseSchedule do
 
     it 'parses daily cron expressions' do
       schedule = Schedule.load('0 0 14 ? * TUE,THU')
-      schedule.should be_a Schedule::Daily
+      schedule.should be_a Schedules::Daily
       schedule.hour.should == 14
       schedule.days.should == [:TUE, :THU]
       schedule.time_zone.should == ActiveSupport::TimeZone.new('UTC')
@@ -99,7 +98,7 @@ describe ThinkfuseSchedule do
 
     it 'parses weekly cron expressions' do
       schedule = Schedule.load('0 0 8 ? * TUE')
-      schedule.should be_a Schedule::Weekly
+      schedule.should be_a Schedules::Weekly
       schedule.hour.should == 8
       schedule.day.should == :TUE
       schedule.to_s.should == 'Tuesdays at 8 am'
@@ -108,7 +107,7 @@ describe ThinkfuseSchedule do
     it 'parses cron expressions with appended time zones' do
       cron = '0 0 14 ? * TUE,THU | Mountain Time (US & Canada)'
       schedule = Schedule.load(cron)
-      schedule.should be_a Schedule::Daily
+      schedule.should be_a Schedules::Daily
       schedule.hour.should == 14
       schedule.days.should == [:TUE, :THU]
       schedule.time_zone.name.should == 'Mountain Time (US & Canada)'
@@ -116,7 +115,7 @@ describe ThinkfuseSchedule do
 
     it 'parses monthly by day of week cron expressions' do
       schedule = Schedule.load('0 0 17 ? * 7#2')
-      schedule.should be_a Schedule::Monthly
+      schedule.should be_a Schedules::Monthly
       schedule.hour.should == 17
       schedule.day.should == :SAT
       schedule.week.should == 1 # converted to 0 base
@@ -128,7 +127,7 @@ describe ThinkfuseSchedule do
 
     it 'parses monthly by day of month cron expressions' do
       schedule = Schedule.load('0 0 12 5 * ?')
-      schedule.should be_a Schedule::Monthly
+      schedule.should be_a Schedules::Monthly
       schedule.hour.should == 12
       schedule.day.should == 5
       schedule.to_s.should == '5th day of each month at Noon'

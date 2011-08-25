@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'schedules/interval_examples'
 require 'schedules/day_of_week_examples'
 
-describe ThinkfuseSchedule::Schedule::MonthlyByWeek do
+describe Schedules::MonthlyByWeek do
 
   it_behaves_like 'schedules with an interval'
   it_behaves_like 'schedules with a day of week'

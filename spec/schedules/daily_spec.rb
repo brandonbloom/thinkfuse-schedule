@@ -1,40 +1,39 @@
 require 'spec_helper'
 
-describe ThinkfuseSchedule::Schedule::Daily do
-  include ThinkfuseSchedule
+describe Schedules::Daily do
 
   describe '#days' do
 
     it 'is validated' do
-      Schedule::Daily.new(:days => []).should be_invalid
-      Schedule::Daily.new(:days => [:FOO]).should be_invalid
+      Schedules::Daily.new(:days => []).should be_invalid
+      Schedules::Daily.new(:days => [:FOO]).should be_invalid
     end
 
     it 'ignores duplicates' do
-      Schedule::Daily.new(:days => [:MON, :MON]).days.should == [:MON]
+      Schedules::Daily.new(:days => [:MON, :MON]).days.should == [:MON]
     end
 
     it 'logically sorts days' do
-      Schedule::Daily.new(:days => [:WED, :TUE]).days.should == [:TUE, :WED]
+      Schedules::Daily.new(:days => [:WED, :TUE]).days.should == [:TUE, :WED]
     end
 
     it 'ignores blank days (eases form handling)' do
-      schedule = Schedule::Daily.new(:days => ['', :MON, ''])
+      schedule = Schedules::Daily.new(:days => ['', :MON, ''])
       schedule.days.should == [:MON]
     end
 
   end
 
   describe '#==' do
-    subject { Schedule::Daily.new(:days => [:TUE, :THU]) }
-    it { should == Schedule::Daily.new(:days => [:TUE, :THU]) }
-    it { should_not == Schedule::Daily.new(:days => [:MON, :FRI]) }
+    subject { Schedules::Daily.new(:days => [:TUE, :THU]) }
+    it { should == Schedules::Daily.new(:days => [:TUE, :THU]) }
+    it { should_not == Schedules::Daily.new(:days => [:MON, :FRI]) }
   end
 
   describe '#occurrences' do
 
     it 'finds next scheduled daily occurrences' do
-      schedule = Schedule::Daily.new(
+      schedule = Schedules::Daily.new(
         :days => [:WED, :FRI], :hour => 6,
         :start_date => Date.new(2010, 10, 18))
       schedule.occurrences(:count => 4).should ==
@@ -47,18 +46,18 @@ describe ThinkfuseSchedule::Schedule::Daily do
   describe '#days_to_s' do
 
     it 'returns a list of day names' do
-      schedule = Schedule::Daily.new(:days => [:MON, :WED, :FRI])
+      schedule = Schedules::Daily.new(:days => [:MON, :WED, :FRI])
       schedule.days_to_s.should == 'Mondays, Wednesdays, and Fridays'
     end
 
     it 'special cases everyday' do
       days = Schedule::DAYS
-      Schedule::Daily.new(:days => days).days_to_s.should == 'Everyday'
+      Schedules::Daily.new(:days => days).days_to_s.should == 'Everyday'
     end
 
     it 'special cases weekdays' do
       days = Schedule::WEEKDAYS
-      Schedule::Daily.new(:days => days).days_to_s.should == 'Weekdays'
+      Schedules::Daily.new(:days => days).days_to_s.should == 'Weekdays'
     end
 
   end

@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'schedules/interval_examples'
 
-describe ThinkfuseSchedule::Schedule::MonthlyByDay do
+describe Schedules::MonthlyByDay do
 
   it_behaves_like 'schedules with an interval'
 

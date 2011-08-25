@@ -1,4 +1,4 @@
-module ThinkfuseSchedule::Schedule::Interval
+module Schedules::Interval
 
   def self.included(base)
     base.class_eval do
@@ -40,4 +40,3 @@ module ThinkfuseSchedule::Schedule::Interval
   end
 
 end
-

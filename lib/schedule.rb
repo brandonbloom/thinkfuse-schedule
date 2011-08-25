@@ -1,4 +1,4 @@
-class ThinkfuseSchedule::Schedule
+class Schedule
 
   include ActiveModel::Validations
   include ActiveModel::Conversion

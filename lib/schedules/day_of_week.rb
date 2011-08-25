@@ -1,11 +1,11 @@
-module ThinkfuseSchedule::Schedule::DayOfWeek
+module Schedules::DayOfWeek
 
   def self.included(base)
     base.class_eval do
 
       attr_reader :day
 
-      validates_inclusion_of :day, :in => ThinkfuseSchedule::Schedule::DAYS
+      validates_inclusion_of :day, :in => Schedule::DAYS
 
     end
   end
@@ -19,11 +19,11 @@ module ThinkfuseSchedule::Schedule::DayOfWeek
   end
 
   def day=(value)
-    @day = ThinkfuseSchedule::Schedule.coerce_day(value)
+    @day = Schedule.coerce_day(value)
   end
 
   def day_index
-    ThinkfuseSchedule::Schedule.day_index(day)
+    Schedule.day_index(day)
   end
 
 end
