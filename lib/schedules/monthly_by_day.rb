@@ -33,6 +33,10 @@ class Schedules::MonthlyByDay < Schedules::Monthly
     super and t.day == day
   end
 
+  def monthly_by
+    'day'
+  end
+
   protected
 
   def day=(value)

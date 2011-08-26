@@ -16,6 +16,10 @@ class Schedules::Monthly < Schedule
     'monthly'
   end
 
+  def serialized_properties
+    super + %w(monthly_by)
+  end
+
   protected
 
   def interval_s

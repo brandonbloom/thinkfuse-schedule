@@ -19,6 +19,10 @@ class Schedules::MonthlyByWeek < Schedules::Monthly
     super + %w(week)
   end
 
+  def monthly_by
+    'week'
+  end
+
   def ==(other)
     super and week == other.week
   end

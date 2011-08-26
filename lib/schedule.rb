@@ -251,6 +251,11 @@ class Schedule
   end
 
   def self.from_hash(params)
+    # Rewrite time_zone_name into a valid time_zone to ensure time_zone set.
+    if params['time_zone_name']
+      params['time_zone'] = ActiveSupport::TimeZone.new(params['time_zone_name'])
+    end
+
     case params['recurrence']
     when 'none'
       return nil

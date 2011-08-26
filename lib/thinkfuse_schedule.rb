@@ -3,6 +3,7 @@ require "thinkfuse_schedule/version"
 require 'active_support/all'
 require 'active_model'
 
+# Define this here so all classes in ./schedules can have Schedules::<klass>
 module Schedules
 end
 
