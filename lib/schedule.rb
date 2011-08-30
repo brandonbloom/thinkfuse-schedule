@@ -204,16 +204,10 @@ class Schedule
     when String
       begin
         #TODO: What about different date formats?
+        throw unless (/\d{4}-\d{2}-\d{2}/ =~ value) == 0
         @start_date = Date.parse(value)
       rescue
         @start_date = value # Fail validation.
-      else
-        # Convert to full years.
-        if @start_date.year < 100
-          # OMG year 3000 bug! :-)
-          @start_date = Date.new(@start_date.year + 2000,
-                                 @start_date.month, @start_date.day)
-        end
       end
     end
   end
@@ -253,28 +247,30 @@ class Schedule
     end
   end
 
-  def self.from_hash(params)
+  def self.from_hash(h)
     # Rewrite time_zone_name into a valid time_zone to ensure time_zone set.
-    if params['time_zone_name']
-      params['time_zone'] = ActiveSupport::TimeZone.new(params['time_zone_name'])
+    if h['time_zone_name']
+      h['time_zone'] = ActiveSupport::TimeZone.new(h['time_zone_name'])
     end
 
-    case params['recurrence']
+    case h['recurrence']
     when 'none'
       return nil
     when 'daily'
-      schedule = Schedules::Daily.new(params)
+      schedule = Schedules::Daily.new(h)
     when 'weekly'
-      schedule = Schedules::Weekly.new(params)
+      schedule = Schedules::Weekly.new(h)
     when 'monthly'
-      case params['monthly_by']
+      case h['monthly_by']
       when 'day'
-        schedule = Schedules::MonthlyByDay.new(params)
+        schedule = Schedules::MonthlyByDay.new(h)
       when 'week'
-        schedule = Schedules::MonthlyByWeek.new(params)
+        schedule = Schedules::MonthlyByWeek.new(h)
       else
         raise 'No monthly repeat selected'
       end
+    else
+      raise "Unknown recurrence: #{h['recurrence'].inspect}"
     end
 
     raise "Schedule not valid: #{schedule.errors}" if schedule.invalid?
@@ -298,4 +294,3 @@ class Schedule
   end
 
 end
-

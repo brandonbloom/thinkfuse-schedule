@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+
 describe Schedule do
 
   describe '#start_date' do
@@ -12,23 +13,22 @@ describe Schedule do
       schedule.should be_valid
     end
 
-    it 'parses a string' do
+    it 'parses a ISO 8601 date string' do
       schedule = Schedule.new(:start_date => '2009-08-09')
       schedule.start_date.should == Date.new(2009, 8, 9)
       schedule.should be_valid
     end
 
-    it 'passes through invalid strings' do
-      date_s = '88/9/2009'
-      schedule = Schedule.new(:start_date => date_s)
-      schedule.start_date.should == date_s
+    it 'rejects non ISO 8601 date strings' do
+      schedule = Schedule.new(:start_date => '8/9/2009')
       schedule.should be_invalid
     end
 
-    it 'converts strings with two digit years to four digit years' do
-      schedule = Schedule.new(:start_date => '34-1-2')
-      schedule.start_date.should == Date.new(2034, 1, 2)
-      schedule.should be_valid
+    it 'passes through invalid strings' do
+      date_s = '2009-88-09'
+      schedule = Schedule.new(:start_date => date_s)
+      schedule.start_date.should == date_s
+      schedule.should be_invalid
     end
 
   end
