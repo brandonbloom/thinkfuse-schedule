@@ -1,6 +1,6 @@
 require 'rspec'
 require 'ri_cal'
-require 'thinkfuse_schedule'
+require 'thinkfuse-schedule'
 
 # No current user to default time zone, so set to UTC here
 Time.zone = ActiveSupport::TimeZone.new('UTC')

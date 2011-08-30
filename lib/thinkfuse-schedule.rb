@@ -1,4 +1,4 @@
-require "thinkfuse_schedule/version"
+require "thinkfuse-schedule/version"
 
 require 'active_support/all'
 require 'active_model'

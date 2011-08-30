@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "thinkfuse_schedule/version"
+require "thinkfuse-schedule/version"
 
 Gem::Specification.new do |s|
-  s.name        = "thinkfuse_schedule"
+  s.name        = "thinkfuse-schedule"
   s.version     = ThinkfuseSchedule::VERSION
   s.authors     = ["Mark Golazeski"]
   s.email       = ["mark@thinkfuse.com"]
@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.summary     = %q{Handle recurrent times based off a scheduel}
   s.description = %q{These are helpers designed to work with getting occurences based on a specified schedule. For example, figuring out the date of the next occurnece of an event that is scheduled for the 3rd Saturday of every 5th month.}
 
-  s.rubyforge_project = "thinkfuse_schedule"
+  s.rubyforge_project = "thinkfuse-schedule"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
