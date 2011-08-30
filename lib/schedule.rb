@@ -1,3 +1,6 @@
+require 'ri_cal'
+
+
 class Schedule
 
   include ActiveModel::Validations
@@ -277,6 +280,21 @@ class Schedule
     raise "Schedule not valid: #{schedule.errors}" if schedule.invalid?
 
     schedule
+  end
+
+  def self.coerce(from)
+    case from
+    when nil
+      nil
+    when Schedule
+      from
+    when Hash
+      self.from_hash(from)
+    when String
+      self.load(from)
+    else
+      raise "Unable to coerce #{from.class} to Schedule"
+    end
   end
 
 end
